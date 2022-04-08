@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "107172088367",
+    "project_id": "breathing-app-df236",
+    "storage_bucket": "breathing-app-df236.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107172088367:android:c5f73b274aa086262fd4da",
+        "android_client_info": {
+          "package_name": "com.softechbusinessservices.breathing_exercisez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107172088367-ppkcd8tnqbinhsoj0sdnlq64i5o40dqa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.softechbusinessservices.breathing_exercisez",
+            "certificate_hash": "63247f73eb972ac2d85ebf068c0d378f524e6650"
+          }
+        },
+        {
+          "client_id": "107172088367-ht6lekclg8ct96i4jcujaokq6hc6lbjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB5Lc4eGSwUzwiFNd8kjhWTJTxlxZlJYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107172088367-ht6lekclg8ct96i4jcujaokq6hc6lbjg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "107172088367-6v4609sphbv8ilia5q40fskocg5b3pur.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jhbhhb.fsdbghjsbgs.gfg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107172088367:android:7f13cb3f38043a242fd4da",
+        "android_client_info": {
+          "package_name": "com.softechbusinessservices.calm_and_breath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107172088367-a3f7c8d3evq6jnkl7o0i34ojc338rjmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.softechbusinessservices.calm_and_breath",
+            "certificate_hash": "fc23f2d6562acb799c07cd871117756ec761056f"
+          }
+        },
+        {
+          "client_id": "107172088367-ht6lekclg8ct96i4jcujaokq6hc6lbjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB5Lc4eGSwUzwiFNd8kjhWTJTxlxZlJYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107172088367-ht6lekclg8ct96i4jcujaokq6hc6lbjg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "107172088367-6v4609sphbv8ilia5q40fskocg5b3pur.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jhbhhb.fsdbghjsbgs.gfg"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
