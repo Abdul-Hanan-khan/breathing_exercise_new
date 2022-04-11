@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:breathing_exercise_new/controller/post_availability_controller.dart';
 import 'package:breathing_exercise_new/other/ad_manager.dart';
 import 'package:breathing_exercise_new/other/app_colors.dart';
 import 'package:breathing_exercise_new/other/http_helper.dart';
@@ -7,7 +8,8 @@ import 'package:breathing_exercise_new/other/utils.dart';
 import 'package:breathing_exercise_new/pages/type_description.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +23,7 @@ class SelectLanguagePage extends StatefulWidget {
 }
 
 class _SelectLanguagePageState extends State<SelectLanguagePage> {
+  var availabilityController=Get.put(PostAvailabilityController());
   List<dynamic> _languagesList = [];
   List<String> countries = ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'];
   TextEditingController controller = new TextEditingController();
@@ -85,7 +88,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
   }
 
   Future<void> _getData() async {
-    Response response = await HttpHelper.post(
+    var response = await HttpHelper.post(
       body: {},
       apiFile: 'languages',
     );
@@ -278,6 +281,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
   Widget _buildRow(var language) {
     return GestureDetector(
       onTap: () {
+        availabilityController.getPostsAvailability(language['lId'].toString());
         Utils.push(context, TypeDescription(language['lId']));
         controller.clear();
       },
@@ -394,7 +398,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
   // }
   signOut() async {
     String email;
-    Response response;
+    var response;
     SharedPreferences pref = await SharedPreferences.getInstance();
     email = pref.getString("email");
     pref.setBool('isverified', false);

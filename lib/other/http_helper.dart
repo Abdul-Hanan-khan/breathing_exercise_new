@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:breathing_exercise_new/models/post_availability_model.dart';
 import 'package:breathing_exercise_new/models/posts_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -41,6 +42,23 @@ class HttpHelper {
       } else
         return null;
     } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<PostAvailability>> getPostAvailability(String languageId) async {
+    try {
+      var response = await http.post(
+        Uri.parse('$_uri/lang_docs'),
+        body: {'language_id': languageId},
+      );
+      if (response.statusCode == 200) {
+        List rawList = jsonDecode(response.body);
+        return rawList.map((json) => PostAvailability.fromJson(json)).toList();
+      } else
+        return null;
+    }
+    catch (e) {
       return null;
     }
   }
