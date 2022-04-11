@@ -11,6 +11,7 @@ import 'package:breathing_exercise_new/other/utils.dart';
 import 'package:breathing_exercise_new/pages/view_document_screen.dart';
 import 'package:breathing_exercise_new/widgets/bounce_anim.dart';
 import 'package:device_info/device_info.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
@@ -425,6 +426,7 @@ class DownloadItem extends StatelessWidget {
           children: <Widget>[
 
             Container(
+              margin: EdgeInsets.only(top: 5),
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.teal[50],
@@ -432,32 +434,35 @@ class DownloadItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(7),
               ),
               // height: 64.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 2),
-                      child: Text(
-                        data.name,
-                        maxLines: 1,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Text(
+                          data.name,
+                          maxLines: 1,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
-                  ),
-                  // Container(
-                  //   width: 30.w,
-                  //   height: 9.h,
-                  //   decoration: BoxDecoration(
-                  //     image: DecorationImage(image: NetworkImage(data.picture)),
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Container(child: _buildActionForTask(data.task)),
-                  ),
-                ],
+                    // Container(
+                    //   width: 30.w,
+                    //   height: 9.h,
+                    //   decoration: BoxDecoration(
+                    //     image: DecorationImage(image: NetworkImage(data.picture)),
+                    //   ),
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Container(child: _buildActionForTask(data.task)),
+                    ),
+                  ],
+                ),
               ),
             ),
             data.task.status == DownloadTaskStatus.running ||

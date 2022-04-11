@@ -60,6 +60,7 @@ class AllAudios extends StatelessWidget {
                           child: ListTile(
 
                             title:
+                                // Text(postsController.posts.data[index].title),
                                 Text(postsController.posts.data[index].title),
                             // leading: const Icon(Icons.audiotrack),
                             trailing: Container(
