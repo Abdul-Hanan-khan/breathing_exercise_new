@@ -87,6 +87,18 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
     super.initState();
   }
 
+
+  ///getting current version of the App
+  // Future<int> _getVersion() async {
+  //   int version;
+  //   List versions;
+  //   // final packageInfo = await PackageInfo.fromPlatform();
+  //   print("Current version:"+packageInfo.version);
+  //   versions= packageInfo.version.split(".");
+  //   return int.parse(versions[0]+versions[1]+versions[2]);
+  // }
+
+
   Future<void> _getData() async {
     var response = await HttpHelper.post(
       body: {},
