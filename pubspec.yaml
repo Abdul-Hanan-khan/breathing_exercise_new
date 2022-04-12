@@ -61,6 +61,8 @@ dependencies:
   path: ^1.6.3
   legacy_progress_dialog: ^0.1.2
   dropdown_search: ^2.0.1
+
+  package_info: ^2.0.2
 #  flutter_sound: ^1.0.6
 
 #  better_player:

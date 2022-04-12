@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:breathing_exercise_new/controller/post_availability_controller.dart';
 import 'package:breathing_exercise_new/other/ad_manager.dart';
@@ -6,6 +7,7 @@ import 'package:breathing_exercise_new/other/app_colors.dart';
 import 'package:breathing_exercise_new/other/http_helper.dart';
 import 'package:breathing_exercise_new/other/utils.dart';
 import 'package:breathing_exercise_new/pages/type_description.dart';
+import 'package:breathing_exercise_new/pages/update_prompt/update_prompt_screen.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:package_info/package_info.dart';
 
 import 'categories_screen.dart';
 import 'email_verification_page.dart';
@@ -87,16 +90,49 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
     super.initState();
   }
 
+  ///checking updates using API \\\
+
+  _checkUpdates() async {
+
+    var latestVersion;
+    int appVersion = await _getVersion();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    latestVersion = pref.getString("latestVersion");
+    // if(latestVersion!=null)
+    // {
+    //   latestVersion = latestVersion.split(".")[0]+latestVersion.split(".")[1]+latestVersion.split(".")[2];
+    // }
+    print("latest pref version: $latestVersion");
+    var response;
+    try{
+      response = await HttpHelper.post(body: {
+        "app_update" : '1',
+      });
+      latestVersion = Platform.isAndroid ? jsonDecode(response.body)["android_update"] : jsonDecode(response.body)["ios_update"];
+      latestVersion= latestVersion.split(".");
+      latestVersion = (latestVersion[0]+latestVersion[1]+latestVersion[2]);
+      // progressing.value = false;
+      if (latestVersion != null && appVersion != null && int.parse(latestVersion) > appVersion) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> UpdatePromptScreen()));
+        // print("Calling Upgrade Prompt Screen ${i++}");
+      }// todo change the bool statement to >
+
+      print("latest version: $latestVersion");
+      pref.setString("latestVersion", latestVersion);
+    }
+    catch(e){}
+
+  }
 
   ///getting current version of the App
-  // Future<int> _getVersion() async {
-  //   int version;
-  //   List versions;
-  //   // final packageInfo = await PackageInfo.fromPlatform();
-  //   print("Current version:"+packageInfo.version);
-  //   versions= packageInfo.version.split(".");
-  //   return int.parse(versions[0]+versions[1]+versions[2]);
-  // }
+  Future<int> _getVersion() async {
+    int version;
+    List versions;
+    final packageInfo = await PackageInfo.fromPlatform();
+    print("Current version:"+packageInfo.version);
+    versions= packageInfo.version.split(".");
+    return int.parse(versions[0]+versions[1]+versions[2]);
+  }
 
 
   Future<void> _getData() async {
