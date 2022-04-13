@@ -4,6 +4,7 @@ import 'package:breathing_exercise_new/other/app_colors.dart';
 import 'package:breathing_exercise_new/pages/select_language_page.dart';
 import 'package:breathing_exercise_new/pages/update_prompt/ClickType.dart';
 import 'package:breathing_exercise_new/pages/update_prompt/utills.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -31,16 +32,20 @@ class _UpdatePromptScreenState extends State<UpdatePromptScreen> implements IFil
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Upgrade Available'),),
+      appBar: AppBar(
+        backgroundColor: AppColors.GREEN_ACCENT,
+        title: const Text('Upgrade Available'),),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(child: Image.asset("assets/image/yusuflogo.png",scale: 1.5,)),
+              Container(child: Image.asset("assets/images/logo.png",scale: 1.5,)),
               const SizedBox(height: 20,),
-              Text( "An updated version is available on the $storeName, Please click the button below to update your App.", style: const TextStyle(fontSize: 18,),),
+              Text( "An updated version is available on the $storeName, Please click the button below to update your App.",
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 18,),),
               const SizedBox(height: 20,),
               Utills.getFilledButton(context, "Update", this, ClickType.UPDATE_APP,AppColors.GREEN_ACCENT)
             ],
@@ -52,7 +57,7 @@ class _UpdatePromptScreenState extends State<UpdatePromptScreen> implements IFil
 
   _getStoreURL(){
     if(Platform.isAndroid)
-      return "https://play.google.com/store/apps/details?id=com.sbs.yousafmobile";
+      return "https://play.google.com/store/apps/details?id=com.softechbusinessservices.calm_and_breath";
     else
       return "https://apps.apple.com/gb/app/lsuk/id1545528069";
   }

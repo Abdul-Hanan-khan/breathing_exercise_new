@@ -49,6 +49,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
 
   @override
   void initState() {
+    _checkUpdates();
     languageCtr.text = 'Select language';
     controller.addListener(() {
       setState(() {
@@ -105,10 +106,8 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
     print("latest pref version: $latestVersion");
     var response;
     try{
-      response = await HttpHelper.post(body: {
-        "app_update" : '1',
-      });
-      latestVersion = Platform.isAndroid ? jsonDecode(response.body)["android_update"] : jsonDecode(response.body)["ios_update"];
+      response = await HttpHelper.getUpdatedVersion();
+      latestVersion = Platform.isAndroid ? response["android_update"] : response["ios_update"];
       latestVersion= latestVersion.split(".");
       latestVersion = (latestVersion[0]+latestVersion[1]+latestVersion[2]);
       // progressing.value = false;
