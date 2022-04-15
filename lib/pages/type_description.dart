@@ -18,8 +18,9 @@ class TypeDescription extends StatelessWidget {
   PostAvailabilityController paController = Get.find();
   ProgressDialog prDialog;
   String languageId;
+  String languageName;
 
-  TypeDescription(this.languageId);
+  TypeDescription(this.languageId,this.languageName);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class TypeDescription extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.GREEN_ACCENT,
-            title: const Text('Category Selection'),
+            title: Text('${languageName}'),
           ),
           backgroundColor: Colors.grey[400],
           body: Obx(
@@ -54,7 +55,7 @@ class TypeDescription extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              paController.postAvailability[0].posts
+                              paController.audioStatus.value
                                   ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 7),
                                     child: BouncingAnim(
@@ -96,7 +97,7 @@ class TypeDescription extends StatelessWidget {
                                       ),
                                   )
                                   : Container(),
-                              paController.postAvailability[1].posts
+                              paController.videoStatus.value
                                   ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 7),
                                     child: BouncingAnim(
@@ -150,7 +151,7 @@ class TypeDescription extends StatelessWidget {
                           SizedBox(
                             height: 5.h,
                           ),
-                          paController.postAvailability[1].posts
+                          paController.documentStatus.value
                               ? Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,

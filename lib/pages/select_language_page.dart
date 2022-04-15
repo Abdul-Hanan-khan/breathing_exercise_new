@@ -329,7 +329,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
     return GestureDetector(
       onTap: () {
         availabilityController.getPostsAvailability(language['lId'].toString());
-        Utils.push(context, TypeDescription(language['lId']));
+        Utils.push(context, TypeDescription(language['lId'],language['name']));
         controller.clear();
       },
       child: ListTile(
