@@ -27,11 +27,11 @@ class _SplashPageState extends State<SplashPage> {
         pref.setBool("visited_before", true);
       }
     });
-   Future.delayed(Duration(
-     seconds: 2,
-   )).then((value) {
-     Utils.pushReplacement(context, SelectLanguagePage());
-   });
+   // Future.delayed(Duration(
+   //   seconds: 2,
+   // )).then((value) {
+   //   Utils.pushReplacement(context, SelectLanguagePage());
+   // });
 
     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>SelectLanguagePage()));
     // TODO: implement initState
@@ -40,6 +40,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: GestureDetector(
         onTap: (){
           Utils.push(context, SelectLanguagePage());
@@ -48,7 +49,7 @@ class _SplashPageState extends State<SplashPage> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/logo.png",scale: 3,),
+              Image.asset("assets/images/splash.jpeg",scale: 3,),
               SizedBox(height: 20,),
               Text("Calm and Breath",style: TextStyle(
                 color: AppColors.GREEN_ACCENT,
