@@ -529,13 +529,21 @@ class DownloadItem extends StatelessWidget {
             onPressed: () {
               onActionClick(task);
             },
-            child: Icon(
-              Icons.delete_forever,
-              color: Colors.red,
-            ),
+            child: Icon(Icons.file_download),
             shape: CircleBorder(),
             constraints: BoxConstraints(minHeight: 32.0, minWidth: 32.0),
           )
+          // RawMaterialButton(
+          //   onPressed: () {
+          //     onActionClick(task);
+          //   },
+          //   child: Icon(
+          //     Icons.delete_forever,
+          //     color: Colors.red,
+          //   ),
+          //   shape: CircleBorder(),
+          //   constraints: BoxConstraints(minHeight: 32.0, minWidth: 32.0),
+          // )
         ],
       );
     } else if (task.status == DownloadTaskStatus.canceled) {
