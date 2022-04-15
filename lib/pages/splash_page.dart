@@ -27,11 +27,11 @@ class _SplashPageState extends State<SplashPage> {
         pref.setBool("visited_before", true);
       }
     });
-   // Future.delayed(Duration(
-   //   seconds: 2,
-   // )).then((value) {
-   //   Utils.pushReplacement(context, SelectLanguagePage());
-   // });
+   Future.delayed(Duration(
+     seconds: 2,
+   )).then((value) {
+     Utils.pushReplacement(context, SelectLanguagePage());
+   });
 
     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>SelectLanguagePage()));
     // TODO: implement initState
