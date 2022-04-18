@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({Key key}) : super(key: key);
 
 
   @override
@@ -50,12 +51,17 @@ class _SplashPageState extends State<SplashPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset("assets/images/splash.jpeg",scale: 3,),
-              SizedBox(height: 20,),
-              Text("Calm and Breath",style: TextStyle(
-                color: AppColors.GREEN_ACCENT,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),)
+              const SizedBox(height: 20,),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Relaxation Exercises for Anxious Times ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                  color: AppColors.GREEN_ACCENT,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),),
+              )
             ],
           ),
         ),

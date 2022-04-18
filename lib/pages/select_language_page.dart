@@ -31,6 +31,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
   List<String> countries = ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'];
   TextEditingController controller = new TextEditingController();
   String filter;
+  RxInt languageCount=4.obs;
 
   var languageCtr = TextEditingController();
   bool _isLoading = true;
@@ -160,6 +161,7 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: ScrollAppBar(
+        automaticallyImplyLeading: false,
         controller: _controller,
         // actions: [
         //   PopupMenuButton(
@@ -191,69 +193,108 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
           : _languagesList.isEmpty
               ? Utils.errorBody(message: 'No language found')
               : SingleChildScrollView(
-                  child: Container(
-                    height: 90.h,
-
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Mental Wellbeing",
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      const Text(
+                        "Mental Wellbeing",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      const Text(
+                        "Self-Care Is How You Take Your Power Back",
+                        textAlign: TextAlign.center,
+                      ),
+                      // SizedBox(
+                      //   height: 10.h,
+                      // ),
+                      const SizedBox(
+                        width: double.infinity,
+                      ),
+                      Image.asset(
+                        "assets/images/logo.png",
+                        scale: 4,
+                      ),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Which language do you speak?',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        const Text(
-                          "Self-Care Is How You Take Your Power Back",
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        const SizedBox(
-                          width: double.infinity,
-                        ),
-                        Image.asset(
-                          "assets/images/logo.png",
-                          scale: 4,
-                        ),
-                        const SizedBox(height: 20),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Which language do you speak?',
-                            textAlign: TextAlign.center,
+                      ),
+                      // const Padding(
+                      //   padding: EdgeInsets.all(8.0),
+                      //   child: Text(
+                      //     'Search from the box below',
+                      //     textAlign: TextAlign.center,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 10),
+                      // const Icon(
+                      //   Icons.arrow_downward,
+                      //   color: AppColors.GREEN_ACCENT,
+                      //   size: 30,
+                      // ),
+                      const SizedBox(height: 10),
+                      _languageBox(),
+                      Obx(()=>  FlatButton(onPressed: (){
+                        print("pressed");
+                        if(languageCount.value == 4){
+                        languageCount.value=_languagesList.length;}
+                        else{
+                          languageCount.value=4;
+                        }
+                      }, child: languageCount.value==4?const Text("See More"):const Text("Show Less"))
                           ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Search from the box below',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Icon(
-                          Icons.arrow_downward,
-                          color: AppColors.GREEN_ACCENT,
-                          size: 30,
-                        ),
-                        const SizedBox(height: 10),
-                        _getBody(context),
-                        SizedBox(height: 10.h),
-                      ],
-                    ),
+                      // _getBody(context),
+                      SizedBox(height: 10.h),
+                    ],
                   ),
                 ),
     );
   }
 
-  Widget _getBody(BuildContext context) {
+  Widget _languageBox(){
+    return Obx(
+        ()=> ListView.separated(
+        separatorBuilder: (context, index) => const Divider(height: 1.0,),
+        shrinkWrap: true,
+        itemCount:languageCount.value,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+         return GestureDetector(
+           onTap: (){
+             availabilityController.getPostsAvailability(_languagesList[index]['lId'].toString());
+             Utils.push(context, TypeDescription(_languagesList[index]['lId'],_languagesList[index]['name']));
+           },
+           child: Card(
+             color: Colors.teal[50],
+             margin: EdgeInsets.symmetric(vertical: 5,horizontal: 15),
+             child: ListTile(
+               leading: Text(_languagesList[index]["name"]),
+               trailing: IconButton(icon: Icon(Icons.arrow_forward),onPressed: (){
+                 Utils.push(context, TypeDescription(_languagesList[index]['lId'],_languagesList[index]['name']));
+
+               },),
+             ),
+           ),
+         );
+        },
+      ),
+    );
+  }
+
+  Widget _getSearchBox(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
       // color: Colors.orange,
@@ -265,9 +306,9 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+                padding: const EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
                 child: TextFormField(
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
